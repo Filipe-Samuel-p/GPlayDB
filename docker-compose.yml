@@ -1,0 +1,17 @@
+services:
+  gplay_db:
+    image: postgres
+    container_name: postgre_GplayDB
+    restart: always
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=filipe_Gplay
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=GplayDB
+      - POSTGRES_ROOT_PASSWORD=1234
+    volumes:
+      - ./src/db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./src/db/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
