@@ -23,3 +23,14 @@ func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(users)
 }
+
+func (h *UserHandler) GetUserById(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	user, err := h.Service.GetUserById(id)
+	if err != nil {
+		http.Error(w, "Usuário não encontrado", http.StatusNotFound)
+		return
+	}
+	json.NewEncoder(w).Encode(user)
+
+}

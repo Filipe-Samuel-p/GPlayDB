@@ -34,3 +34,13 @@ func (r *UserRepository) GetAllUsers() ([]models.User, error) {
 	return users, nil
 
 }
+
+func (r *UserRepository) GetUserById(id string) (*models.User, error) {
+	var u models.User
+	err := r.DB.QueryRow("SELECT id, name, email, created_at FROM users WHERE id = $1", id).
+		Scan(&u.ID, &u.Name, &u.Email, &u.CreatedAt)
+	if err != nil {
+		return nil, err
+	}
+	return &u, nil
+}

@@ -18,6 +18,7 @@ func main() {
 	service := services.NewUserService(repo)
 	handler := handler.NewUserHandler(service)
 
+	http.HandleFunc("GET /users/{id}", handler.GetUserById)
 	http.HandleFunc("GET /users", handler.GetAllUsers)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))

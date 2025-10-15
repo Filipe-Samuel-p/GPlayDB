@@ -16,3 +16,7 @@ func NewUserService(repo *repositories.UserRepository) *UserService {
 func (u *UserService) GetAllUsers() ([]models.User, error) {
 	return u.Repo.GetAllUsers()
 }
+
+func (u *UserService) GetUserById(id string) (*models.User, error) {
+	return u.Repo.GetUserById(id)
+}
