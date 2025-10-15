@@ -1,4 +1,4 @@
-module github.com/Filipe-Samuel-p/GPlayDB
+module gplaydb
 
 go 1.24.2
 

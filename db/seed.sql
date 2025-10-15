@@ -23,7 +23,7 @@ SELECT
     'Usuário ' || seq,
     'usuario' || seq || '@exemplo.com',
     CURRENT_TIMESTAMP - (random() * 365 || ' days')::interval
-FROM generate_series(1,5000) seq;
+FROM generate_series(1,10) seq;
 
 -- Inserir assinaturas (múltiplas e realmente aleatórias por usuário)
 WITH user_subscriptions AS (
