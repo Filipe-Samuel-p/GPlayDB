@@ -18,6 +18,7 @@ func main() {
 	service := services.NewUserService(repo)
 	handler := handler.NewUserHandler(service)
 
+	http.HandleFunc("POST /users", handler.InsertUser)
 	http.HandleFunc("GET /users/{id}", handler.GetUserById)
 	http.HandleFunc("GET /users", handler.GetAllUsers)
 

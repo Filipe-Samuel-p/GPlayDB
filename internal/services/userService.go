@@ -3,6 +3,7 @@ package services
 import (
 	"gplaydb/internal/models"
 	"gplaydb/internal/repositories"
+	"time"
 )
 
 type UserService struct {
@@ -19,4 +20,11 @@ func (u *UserService) GetAllUsers() ([]models.User, error) {
 
 func (u *UserService) GetUserById(id string) (*models.User, error) {
 	return u.Repo.GetUserById(id)
+}
+
+func (u *UserService) InsertUser(newUser *models.User) (models.User, error) {
+
+	newUser.CreatedAt = time.Now()
+
+	return u.Repo.InsertUser(newUser)
 }

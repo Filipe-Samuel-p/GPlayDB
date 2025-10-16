@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"gplaydb/internal/models"
 	"gplaydb/internal/services"
 )
 
@@ -32,5 +33,20 @@ func (h *UserHandler) GetUserById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(user)
+
+}
+
+func (h *UserHandler) InsertUser(w http.ResponseWriter, r *http.Request) {
+
+	var user models.User
+	json.NewDecoder(r.Body).Decode(&user)
+	u, err := h.Service.InsertUser(&user)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	json.NewEncoder(w).Encode(u)
+	w.WriteHeader(http.StatusCreated)
 
 }

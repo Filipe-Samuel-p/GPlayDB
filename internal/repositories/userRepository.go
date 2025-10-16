@@ -44,3 +44,20 @@ func (r *UserRepository) GetUserById(id string) (*models.User, error) {
 	}
 	return &u, nil
 }
+
+func (r *UserRepository) InsertUser(newUser *models.User) (models.User, error) {
+	var u models.User
+	query := `
+		INSERT INTO users (name, email, created_at)
+		VALUES ($1, $2, $3)
+		RETURNING id, name, email, created_at
+	`
+
+	err := r.DB.QueryRow(query, newUser.Name, newUser.Email, newUser.CreatedAt).
+		Scan(&u.ID, &u.Name, &u.Email, &u.CreatedAt)
+
+	if err != nil {
+		return models.User{}, err
+	}
+	return u, nil
+}
