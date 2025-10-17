@@ -18,6 +18,8 @@ func main() {
 	service := services.NewUserService(repo)
 	handler := handler.NewUserHandler(service)
 
+	http.HandleFunc("PUT /users/{id}", handler.UpdateUser)
+	http.HandleFunc("DELETE /users/{id}", handler.DeleteUserById)
 	http.HandleFunc("POST /users", handler.InsertUser)
 	http.HandleFunc("GET /users/{id}", handler.GetUserById)
 	http.HandleFunc("GET /users", handler.GetAllUsers)

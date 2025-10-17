@@ -61,3 +61,24 @@ func (r *UserRepository) InsertUser(newUser *models.User) (models.User, error) {
 	}
 	return u, nil
 }
+
+func (r *UserRepository) DeleteUserById(id string) error {
+	query := `DELETE FROM users
+			WHERE id = $1`
+
+	_, err := r.DB.Exec(query, id)
+	return err
+}
+
+func (r *UserRepository) UpdateUser(user *models.User) (*models.User, error) {
+
+	var userAux models.User
+	query := ` UPDATE users SET name=$1, email=$2
+				WHERE id = $3
+				RETURNING id, name, email,created_at`
+
+	err := r.DB.QueryRow(query, user.Name, user.Email, user.ID).
+		Scan(&userAux.ID, &userAux.Name, &userAux.Email, &userAux.CreatedAt)
+	return &userAux, err
+
+}
