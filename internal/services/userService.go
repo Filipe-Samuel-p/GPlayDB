@@ -4,6 +4,8 @@ import (
 	"gplaydb/internal/models"
 	"gplaydb/internal/repositories"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type UserService struct {
@@ -18,7 +20,7 @@ func (s *UserService) GetAllUsers() ([]models.User, error) {
 	return s.Repo.GetAllUsers()
 }
 
-func (s *UserService) GetUserById(id string) (*models.User, error) {
+func (s *UserService) GetUserById(id uuid.UUID) (*models.User, error) {
 	return s.Repo.GetUserById(id)
 }
 
@@ -29,7 +31,7 @@ func (s *UserService) InsertUser(newUser *models.User) (models.User, error) {
 	return s.Repo.InsertUser(newUser)
 }
 
-func (s *UserService) DeleteUserById(id string) error {
+func (s *UserService) DeleteUserById(id uuid.UUID) error {
 	return s.Repo.DeleteUserById(id)
 }
 
@@ -50,4 +52,8 @@ func (s *UserService) UpdateUser(user *models.User) (*models.User, error) {
 	userUpdate, err := s.Repo.UpdateUser(originalUser)
 
 	return userUpdate, err
+}
+
+func (s *UserService) UserWithProducts(id uuid.UUID) (*models.User, error) {
+	return s.Repo.UserWithProducts(id)
 }
