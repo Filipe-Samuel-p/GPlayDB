@@ -63,7 +63,7 @@ Durante o minicurso (2h de duração), os participantes irão percorrer **todas 
 ---
 
 ## Modelagem do banco
-<img src="image/GPlayDB.pngs" alt="Modelagem do banco">
+<img src="image/GPlayDB.png" alt="Modelagem do banco">
 
 ## 🚀 Como Utilizar
 
