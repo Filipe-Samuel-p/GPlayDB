@@ -13,4 +13,7 @@ services:
       - POSTGRES_DB=GplayDB
       - POSTGRES_ROOT_PASSWORD=1234
     volumes:
+       - ./db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+       - ./db/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
+
         
