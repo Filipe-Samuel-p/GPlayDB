@@ -19,7 +19,7 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 }
 
 func (r *UserRepository) GetAllUsers() ([]models.User, error) {
-	rows, err := r.DB.Query("SELECT id, name, email, created_at FROM users")
+	rows, err := r.DB.Query("Construa a Query aqui")
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao executar a query: %w", err)
 	}
@@ -43,7 +43,7 @@ func (r *UserRepository) GetUserById(id uuid.UUID) (*models.User, error) {
 
 	var u models.User
 	err := r.DB.QueryRow(
-		"SELECT id, name, email, created_at FROM users WHERE id = $1",
+		"Construa a query aqui",
 		id,
 	).Scan(&u.ID, &u.Name, &u.Email, &u.CreatedAt)
 
@@ -60,9 +60,7 @@ func (r *UserRepository) GetUserById(id uuid.UUID) (*models.User, error) {
 func (r *UserRepository) InsertUser(newUser *models.User) (models.User, error) {
 	var u models.User
 	query := `
-		INSERT INTO users (name, email, created_at)
-		VALUES ($1, $2, $3)
-		RETURNING id, name, email, created_at
+	Escreva Aqui
 	`
 
 	err := r.DB.QueryRow(query, newUser.Name, newUser.Email, newUser.CreatedAt).
@@ -75,8 +73,7 @@ func (r *UserRepository) InsertUser(newUser *models.User) (models.User, error) {
 }
 
 func (r *UserRepository) DeleteUserById(id uuid.UUID) error {
-	query := `DELETE FROM users
-			WHERE id = $1`
+	query := `Escreva Aqui`
 
 	_, err := r.DB.Exec(query, id)
 	return err
@@ -85,9 +82,7 @@ func (r *UserRepository) DeleteUserById(id uuid.UUID) error {
 func (r *UserRepository) UpdateUser(user *models.User) (*models.User, error) {
 
 	var userAux models.User
-	query := ` UPDATE users SET name=$1, email=$2
-				WHERE id = $3
-				RETURNING id, name, email,created_at`
+	query := `Escreva aqui`
 
 	err := r.DB.QueryRow(query, user.Name, user.Email, user.ID).
 		Scan(&userAux.ID, &userAux.Name, &userAux.Email, &userAux.CreatedAt)
@@ -96,14 +91,9 @@ func (r *UserRepository) UpdateUser(user *models.User) (*models.User, error) {
 }
 
 func (r *UserRepository) UserWithProducts(id uuid.UUID) (*models.User, error) {
+
 	query := `
-		SELECT 
-			u.id, u.name, u.email, u.created_at,
-			p.id, p.name, p.monthly_price
-		FROM users u
-		INNER JOIN subscriptions s ON s.user_id = u.id
-		INNER JOIN products p ON p.id = s.product_id
-		WHERE u.id = $1
+		Escreva aqui
 	`
 
 	rows, err := r.DB.Query(query, id)

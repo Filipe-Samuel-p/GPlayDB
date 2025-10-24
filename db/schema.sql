@@ -1,4 +1,4 @@
--- Habilita extensão para gerar UUID automaticamente (ainda usada para users)
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS categories (
